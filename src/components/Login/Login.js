@@ -18,7 +18,7 @@ const Login = ({ history }) => {
         alert(error);
       }
     },
-    [history]
+    [history],
   );
 
   const { currentUser } = useContext(AuthContext);
@@ -49,6 +49,7 @@ const Login = ({ history }) => {
           Submit
         </button>
       </form>
+      <button onClick={() => app.auth().signOut()}>Sign Out</button>
     </div>
   );
 };

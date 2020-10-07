@@ -1,11 +1,12 @@
 import React, { useCallback, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
-import { AuthContext } from '../../Auth';
+import { Redirect, withRouter } from 'react-router-dom';
+import { AuthContext } from '../../Auth.js';
 import app from '../../base';
 
-function Login({ history }) {
-  const handleLogin = useCallback(
+const Login = ({ history }) => {
+  const handleSubmit = useCallback(
     async (event) => {
+      console.log('eveeeee', event);
       event.preventDefault();
       const { email, password } = event.target.elements;
       try {
@@ -21,7 +22,7 @@ function Login({ history }) {
   );
 
   const { currentUser } = useContext(AuthContext);
-
+  console.log(currentUser, 'currr');
   if (currentUser) {
     return <Redirect to="/" />;
   }
@@ -29,15 +30,27 @@ function Login({ history }) {
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit}>
         <label>Email</label>
-        <input name="email" placeholder="email" type="email" />
+        <input
+          className="email"
+          name="email"
+          placeholder="email"
+          type="email"
+        />
         <label>Password</label>
-        <input name="password" placeholder="password" type="password" />
+        <input
+          className="password"
+          name="password"
+          placeholder="password"
+          type="password"
+        />
+        <button className="submit" type="submit">
+          Submit
+        </button>
       </form>
-      <button type="submit">Submit</button>
     </div>
   );
-}
+};
 
-export default Login;
+export default withRouter(Login);

@@ -31,7 +31,6 @@ const Signup = ({ history }) => {
           await app
             .auth()
             .currentUser.sendEmailVerification(actionCodeSettings);
-          // console.log('sent');
         } catch (error) {
           console.log(error, 'error');
         }
@@ -40,7 +39,7 @@ const Signup = ({ history }) => {
         alert(error);
       }
     },
-    [history]
+    [history],
   );
   return (
     <div>

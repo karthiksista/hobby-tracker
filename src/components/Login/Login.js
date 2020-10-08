@@ -1,5 +1,6 @@
 import React, { useCallback, useContext } from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
+import { Button, Input } from '@material-ui/core';
 import { AuthContext } from '../../Auth.js';
 import app from '../../base';
 
@@ -13,6 +14,7 @@ const Login = ({ history }) => {
         await app
           .auth()
           .signInWithEmailAndPassword(email.value, password.value);
+        localStorage.setItem('isAuthenticated', true);
         history.push('/');
       } catch (error) {
         alert(error);
@@ -28,28 +30,33 @@ const Login = ({ history }) => {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          className="email"
-          name="email"
-          placeholder="email"
-          type="email"
-        />
-        <label>Password</label>
-        <input
-          className="password"
-          name="password"
-          placeholder="password"
-          type="password"
-        />
-        <button className="submit" type="submit">
-          Submit
-        </button>
-      </form>
-      <button onClick={() => app.auth().signOut()}>Sign Out</button>
+    <div className="login-wrapper">
+      <h1 className="page-title">Login</h1>
+      <div className="login-form">
+        <form onSubmit={handleSubmit}>
+          <Input
+            required
+            placeholder="Email"
+            className="email"
+            name="email"
+            type="email"
+          />
+          <Input
+            required
+            placeholder="Password"
+            className="password"
+            name="password"
+            type="password"
+          />
+          <Button type="submit" className="primary-button" variant="contained">
+            Login
+          </Button>
+        </form>
+
+        <h5 className="page-title">
+          New User ? <Link to="/signup"> Sign Up</Link>
+        </h5>
+      </div>
     </div>
   );
 };

@@ -3,9 +3,14 @@ import app from '../../base';
 
 function Home() {
   return (
-    <div>
+    <div className="home-page">
       <h1>Home</h1>
-      <button onClick={() => app.auth().signOut()}>Sign Out</button>
+      <button
+        onClick={() => {
+          app.auth().signOut();
+        }}>
+        Sign Out
+      </button>
     </div>
   );
 }

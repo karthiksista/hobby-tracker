@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react';
 import app from './base';
 
 export const AuthContext = React.createContext();
@@ -15,5 +15,7 @@ const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+//
 
 export default AuthProvider;
